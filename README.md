@@ -4,7 +4,7 @@
 
 Before you can install Jenkins, you need to setup a Java virtual machine on your system. Here, let's install the latest OpenJDK Runtime Environment 1.8.0 using YUM:
 
-sudo yum -y install java
+- sudo yum -y install java
 
 After the installation, you can confirm it by running the following command:
 
@@ -16,6 +16,7 @@ For 64 Bit:
 - cd /opt/ 
 - wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz"
 - tar xzf jdk-7u79-linux-x64.tar.gz
+
 For 32 Bit:
 - cd /opt/
 - wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-i586.tar.gz"
@@ -24,11 +25,17 @@ For 32 Bit:
 Now you should to install Java manually:
 
 cd /opt/jdk1.7.0_79/
+
 alternatives --install /usr/bin/java java /opt/jdk1.7.0_79/bin/java 2
+
 alternatives --config java
+
 alternatives --install /usr/bin/jar jar /opt/jdk1.7.0_79/bin/jar 2
+
 alternatives --install /usr/bin/javac javac /opt/jdk1.7.0_79/bin/javac 2
+
 alternatives --set jar /opt/jdk1.7.0_79/bin/jar
+
 alternatives --set javac /opt/jdk1.7.0_79/bin/javac
 
 After the installation, you can confirm it by running the following command:
@@ -36,7 +43,9 @@ After the installation, you can confirm it by running the following command:
 - java -version
 
 java version "1.7.0_79"
+
 Java(TM) SE Runtime Environment (build 1.7.0_79-b15)
+
 Java HotSpot(TM) 64-Bit Server VM (build 24.79-b02, mixed mode)
 
 Now you should to export variables:
@@ -44,7 +53,9 @@ Now you should to export variables:
 - vim ~/.bashrc
 
 export JAVA_HOME=/opt/jdk1.7.0_79
+
 export JRE_HOME=/opt/jdk1.7.0_79/jre
+
 export PATH=$PATH:/opt/jdk1.7.0_79/bin:/opt/jdk1.7.0_79/jre/bin
 
 Restart bashrc:
