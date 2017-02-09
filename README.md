@@ -103,7 +103,9 @@ Download newest version of Maven from: https://maven.apache.org/download.cgi
  - vim ~/.bashrc
 
 export M2_HOME=/usr/local/maven
+
 export PATH=${M2_HOME}/bin:${PATH}
+
 export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-1.7.0.25/jre
 
 Restart bashrc:
@@ -126,16 +128,23 @@ Open Jenkins:
 Go to:
 
 -  Manage Jenkins - Manage Plugins - Available:
+
 Add "Maven Integration Plugin"
+
 Add "GitLab Plugin"
 
 -  Manage Jenkins - Global Tool Configuration. 
+
 Click on JDK, then enter NAME = "Java 1.*" and JAVA_HOME = "/opt/jdk1.*"
+
 Click on Maven, then enter NAME = "Maven ***" and MAVEN_HOME = /usr/local/maven"
 
 -  Manage Jenkins - Configure System - GitLab:
+
 Enter 'Connection Name' = "GitLab"
+
 Enter 'GitLab Host URL' = "http://your-gitlab-ip
+
 Create 'Credentials'
 
 # Step 5: Create New Node
@@ -143,42 +152,59 @@ Create 'Credentials'
 - Manage Jenkins - Manage Nodes - New Node:
 
 Enter 'Node Name'
+
 Point 'Permanent Agent'
+
 Enter '# of executors'(how many jobs can be run at the same time)
+
 Choose 'Launch metod' = "Launch slave agents via SSH" - 'Add'
 	
 
-How to setup a Jenkins slave with ssh private key:
+- How to setup a Jenkins slave with ssh private key:
 
+On the Slave-server:
 
-			Slave Machine
-		
- [Slave] Create Account for Autobuild
-slave:~$ sudo adduser jenkins
+[Slave] Create Account for Autobuild
 
-1) Create private key and public key
-slave:~$ ssh-keygen -t rsa -C "The access key for the slave Jenkins"
+- slave:~$ sudo adduser jenkins
+
+Create private key and public key:
+
+- slave:~$ ssh-keygen -t rsa -C "The access key for the slave Jenkins"
+
 (note: Enter passphrase)
+
 Output:
+
 private key: id_rsa         # copy to master 
+
 public key: id_rsa.pub    # copy to slave (.ssh/authorized_keys)
 
-2) Setup Authorized key
-	slave:~$ cat id_rsa.pub > ~/.ssh/authorized_keys
+Setup Authorized key:
 
+- slave:~$ cat id_rsa.pub > ~/.ssh/authorized_keys
 
-	Jenkins Master Machine
-3) Setup the Credential key
+On Jenkins Master Machine:
+
+Setup the Credential key:
+
 [Manage Jenkins] -> [Manage Credential] -> [Add Credentials]: 
+
 Select: SSH Username with private key
 	
-	Info
-	# you are on the slave
-(a) copy the private key
-    slave:~$ cd .ssh;cat id_rsa    
+Info:
 
-# you are on the Jenkins master
+you are on the slave:
+
+(a) copy the private key
+
+- slave:~$ cd .ssh;cat id_rsa    
+
+you are on the Jenkins master:
+
 (b) paste to the jenkins master board
-      Private key:
-      Enter directly: <private key ascii>
+
+ Private key:
+ 
+ Enter directly: <private key ascii>
 
